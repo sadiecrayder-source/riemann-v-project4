@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riemann-V | Lecture</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root { --pink: #ff007f; --bg: #0a0508; }
+        body { background: var(--bg); color: #e6edf3; font-family: 'Inter'; margin: 0; line-height: 1.8; }
+        nav { background: #1a0d14; padding: 1rem 5%; display: flex; justify-content: space-between; border-bottom: 2px solid var(--pink); position: sticky; top: 0; z-index: 1000; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; opacity: 0.6; font-weight: bold; }
+        .content { padding: 60px 18%; }
+        section { margin-bottom: 100px; padding: 40px; background: rgba(255,255,255,0.02); border-left: 5px solid var(--pink); border-radius: 15px; }
+        h2 { font-family: 'Orbitron'; color: var(--pink); }
+        .trivia-box { background: #1a0d14; border: 2px solid var(--pink); padding: 40px; text-align: center; border-radius: 20px; }
+        .btn { background: var(--pink); color: white; border: none; padding: 15px 30px; cursor: pointer; border-radius: 8px; font-weight: bold; font-family: 'Orbitron'; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="font-family:'Orbitron'; color:var(--pink)">RIEMANN-V</div>
+        <div>
+            <a href="index.html">HOME</a>
+            <a href="lecture.html" style="color:var(--pink); opacity:1;">LECTURE</a>
+            <a href="visualizer.html">SIMULATOR</a>
+            <a href="archives.html">ARCHIVES</a>
+            <a href="audit.html">VERIFY</a>
+        </div>
+    </nav>
+    <div class="content">
+        <h1>Theoretical Architecture</h1>
+        <section>
+            <h2>The Limit Definition</h2>
+            \[ \int_{a}^{b} f(x) \, dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*) \Delta x \]
+            <p>This formula represents the core of accumulation in AP Calculus.</p>
+        </section>
+        <div class="trivia-box">
+            <h2>AP Trivia</h2>
+            <p id="qText"></p>
+            <input type="text" id="triviaAns" style="padding:10px; background:transparent; border:1px solid var(--pink); color:white;">
+            <br><button onclick="checkTrivia()" class="btn" style="margin-top:10px">CHECK ANSWER</button>
+            <p id="triviaFeedback"></p>
+        </div>
+    </div>
+    <script>
+        const questions = [{q: "Is RRAM an overestimate for increasing functions?", a: "yes"}];
+        let idx = 0;
+        function loadQ() { document.getElementById('qText').innerText = questions[idx].q; }
+        function checkTrivia() {
+            const user = document.getElementById('triviaAns').value.toLowerCase();
+            if(user === questions[idx].a) {
+                confetti({ particleCount: 150, spread: 70, colors: ['#ff007f'] });
+                document.getElementById('triviaFeedback').innerText = "Answer: " + questions[idx].a;
+            }
+        }
+        loadQ();
+    </script>
+</body>
+</html>
