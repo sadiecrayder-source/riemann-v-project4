@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riemann-V | Home</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --pink: #ff007f; --bg: #0a0508; }
+        body { background: var(--bg); color: white; font-family: 'Inter'; margin: 0; text-align: center; overflow-x: hidden; }
+        nav { background: #1a0d14; padding: 1rem 5%; display: flex; justify-content: space-between; border-bottom: 2px solid var(--pink); position: sticky; top: 0; z-index: 1000; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; opacity: 0.6; font-weight: bold; }
+        nav a.active { opacity: 1; color: var(--pink); }
+        .hero { padding: 120px 10%; }
+        h1 { font-family: 'Orbitron'; font-size: 3.5rem; color: var(--pink); text-shadow: 0 0 15px var(--pink); }
+        .game-area { background: rgba(255,0,127,0.05); padding: 40px; border-radius: 25px; border: 1px solid var(--pink); display: inline-block; margin-top: 40px; position: relative; }
+        input { background: transparent; border: 1px solid var(--pink); color: white; padding: 10px; border-radius: 5px; width: 80px; text-align: center; font-size: 1.2rem; }
+        .btn { background: var(--pink); color: white; padding: 15px 30px; border-radius: 10px; cursor: pointer; border: none; font-weight: bold; margin-top: 20px; font-family: 'Orbitron'; }
+        .emoji-drop { position: absolute; font-size: 3rem; animation: fall 1s forwards; pointer-events: none; z-index: 2000; }
+        @keyframes fall { from { top: -50px; opacity: 1; } to { top: 500px; opacity: 0; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="font-family:'Orbitron'; color:var(--pink)">RIEMANN-V</div>
+        <div>
+            <a href="index.html" class="active">HOME</a>
+            <a href="lecture.html">LECTURE</a>
+            <a href="visualizer.html">SIMULATOR</a>
+            <a href="archives.html">ARCHIVES</a>
+            <a href="audit.html">VERIFY</a>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>Explore the Topic of Riemann Sums</h1>
+        <div class="game-area">
+            <h3>Mental Math Warmup</h3>
+            <p id="gameText" style="font-size: 1.5rem;">Calculate: <span id="num1"></span> + <span id="num2"></span></p>
+            <input type="number" id="gameInput">
+            <br><button onclick="checkSum()" class="btn">SUBMIT</button>
+            <p id="feedback" style="margin-top: 20px; font-weight: bold;"></p>
+        </div>
+    </div>
+    <script>
+        function generateQ() {
+            document.getElementById('num1').innerText = Math.floor(Math.random() * 20) + 1;
+            document.getElementById('num2').innerText = Math.floor(Math.random() * 20) + 1;
+            document.getElementById('gameInput').value = "";
+        }
+        function spawnThumbsDown() {
+            for(let i=0; i<5; i++) {
+                const emoji = document.createElement('div');
+                emoji.innerText = "👎"; emoji.className = "emoji-drop";
+                emoji.style.left = Math.random() * window.innerWidth + "px";
+                document.body.appendChild(emoji);
+                setTimeout(() => emoji.remove(), 1000);
+            }
+        }
+        function checkSum() {
+            const n1 = parseInt(document.getElementById('num1').innerText);
+            const n2 = parseInt(document.getElementById('num2').innerText);
+            const user = parseInt(document.getElementById('gameInput').value);
+            if(user === (n1 + n2)) {
+                confetti({ particleCount: 150, spread: 70, colors: ['#ff007f', '#ffffff'] });
+                setTimeout(generateQ, 1500);
+            } else { spawnThumbsDown(); }
+        }
+        generateQ();
+    </script>
+</body>
+</html>
