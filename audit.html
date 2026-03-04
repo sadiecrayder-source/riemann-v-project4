@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riemann-V | Verify</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --pink: #ff007f; --bg: #0a0508; }
+        body { background: var(--bg); color: white; font-family: 'Inter'; margin: 0; text-align: center; }
+        nav { background: #1a0d14; padding: 1rem 5%; display: flex; justify-content: space-between; border-bottom: 2px solid var(--pink); position: sticky; top: 0; z-index: 1000; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; opacity: 0.6; font-weight: bold; }
+        .audit-card { max-width: 500px; margin: 100px auto; padding: 50px; background: #1a0d14; border: 1px solid var(--pink); border-radius: 20px; }
+        input { background: transparent; border: 1px solid var(--pink); color: white; padding: 10px; width: 100px; text-align: center; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="font-family:'Orbitron'; color:var(--pink)">RIEMANN-V</div>
+        <div>
+            <a href="index.html">HOME</a>
+            <a href="lecture.html">LECTURE</a>
+            <a href="visualizer.html">SIMULATOR</a>
+            <a href="archives.html">ARCHIVES</a>
+            <a href="audit.html" style="color:var(--pink); opacity:1">VERIFY</a>
+        </div>
+    </nav>
+    <div class="audit-card">
+        <h1>Logic Verification</h1>
+        <p>f(x) = x + 3 on [0,2], n=2. Right Sum?</p>
+        <input type="number" id="ans">
+        <br><button onclick="if(document.getElementById('ans').value == 9) confetti({colors:['#ff007f']})" style="margin-top:20px; padding:10px 20px; background:var(--pink); color:white; border:none; border-radius:5px; cursor:pointer;">VERIFY</button>
+    </div>
+</body>
+</html>
